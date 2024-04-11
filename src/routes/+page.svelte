@@ -1,33 +1,35 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { timerTextFromSeconds } from '$lib/utils';
+	import { startTime, timerMinutes } from '$lib/stores';
 	
 	const defaultTitle = 'Tomato Timer';
 	
-	let timerMinutes = 25;
-	let timerText = timerTextFromSeconds(timerMinutes * 60);
+	let timerText = '--:--';
 	let progress = 0;
-	let startTime: Date | undefined;
 	let currentTimerInterval: number | undefined;
+	let manualInputMinutes = $timerMinutes || 25;
 	
 	const updateTimer = () => {
-		if (!startTime) {
+		if (!$startTime) {
 			console.error('Timer started without a start time!');
 			return;
 		}
-		const secondsElapsed = (+new Date() - +startTime) / 1000;
-		const secondsRemaining = timerMinutes * 60 - secondsElapsed;
+		const secondsElapsed = (+new Date() - +$startTime) / 1000;
+		const secondsRemaining = $timerMinutes * 60 - secondsElapsed;
+		progress = secondsElapsed / ($timerMinutes * 60);
 	
-		if (secondsRemaining <= 0) {
+		if (progress >= 1) {
+			progress = 1;
 			clearInterval(currentTimerInterval);
 			document.title = defaultTitle;
+			startTime.set(null);
 			timerText = '00:00';
 			alert('Timer finished!');
 			return;
 		}
 		timerText = timerTextFromSeconds(secondsRemaining);
 		document.title = timerText;
-		progress = secondsElapsed / (timerMinutes * 60);
 	};
 	
 	const handleTimerToggle = () => {
@@ -39,14 +41,20 @@
 			clearInterval(currentTimerInterval);
 		}
 		if (minutes) {
-			timerMinutes = minutes;
+			timerMinutes.set(minutes);
+			startTime.set(null);
 		}
-		startTime = new Date();
+		if (!$startTime) {
+			startTime.set(new Date());
+		}
 		updateTimer();
-		currentTimerInterval = setInterval(updateTimer, 125);
+		currentTimerInterval = setInterval(updateTimer, 100);
 	};
 	
 	onMount(() => {
+		if ($startTime) {
+			handleStart();
+		}
 		document.addEventListener('keydown', (event) => {
 			if (event.code === 'Space') {
 				handleTimerToggle();
@@ -67,8 +75,8 @@
 {/each}
 </div>
 <div id="manual">
-<input type="number" min="0" bind:value={timerMinutes} />
-<button on:click={handleTimerToggle}>Start</button>
+<input type="number" min="0" bind:value={manualInputMinutes} />
+<button on:click={() => handleStart(manualInputMinutes)}>Start</button>
 </div>
 
 <h2>{timerText}</h2>
