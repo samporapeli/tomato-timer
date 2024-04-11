@@ -1,10 +1,12 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+
+	import { defaultTitle } from '$lib/config';
 	import { startTime, timerMinutes, timerProgress, timerText } from '$lib/stores';
 	import { handleStart, handleTimerToggle } from '$lib/timer';
-  import { defaultTitle } from '$lib/config';
 
-  let manualInputMinutes = $timerMinutes || 25;
+
+	let manualInputMinutes = $timerMinutes || 25;
 	
 	onMount(() => {
 		if ($startTime) {

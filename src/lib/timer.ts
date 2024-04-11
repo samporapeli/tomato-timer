@@ -1,7 +1,8 @@
 import { get } from 'svelte/store';
-import { timerTextFromSeconds } from '$lib/utils';
-import { startTime, timerMinutes, timerProgress, timerText, documentTitle } from '$lib/stores';
+
 import { defaultTitle } from '$lib/config';
+import { documentTitle, startTime, timerMinutes, timerProgress, timerText } from '$lib/stores';
+import { timerTextFromSeconds } from '$lib/utils';
 
 let currentTimerInterval: number | undefined;
 

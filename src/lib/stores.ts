@@ -1,6 +1,7 @@
 import { type Writable, writable } from 'svelte/store';
-import { defaultTitle } from '$lib/config';
+
 import { browser } from '$app/environment';
+import { defaultTitle } from '$lib/config';
 
 /* Start time of the timer */
 const startTimeKey = 'tomatoTimerStartTime';
