@@ -24,8 +24,6 @@
 	<title>{defaultTitle}</title>
 </svelte:head>
 
-<h1>Tomato Timer</h1>
-
 <div id="quickstart">
 {#each [25, 5, 10] as minutes}
 	<button on:click={() => handleStart(minutes)}>{minutes} minutes</button>
@@ -36,5 +34,36 @@
 <button on:click={() => handleStart(manualInputMinutes)}>Start</button>
 </div>
 
-<h2>{$timerText}</h2>
-<h3>{($timerProgress * 100).toFixed(2)} %</h3>
+<h2 id="timer">{$timerText}</h2>
+<h3 id="progress">{($timerProgress * 100).toFixed(2)} %</h3>
+
+<style lang="scss">
+	#quickstart, #manual {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 0.3rem;
+	}
+
+	button, input {
+		min-height: 3rem;
+	}
+
+	#manual {
+		input {
+			width: 80%;
+		}
+		button {
+			width: calc(20% - 1rem);
+		}
+	}
+
+	#timer {
+		margin-top: 4rem;
+	}
+
+	#progress {
+		margin-top: 3rem;
+		color: lightgray;
+	}
+</style>
