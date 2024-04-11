@@ -1,4 +1,5 @@
 import { type Writable, writable } from 'svelte/store';
+import { defaultTitle } from '$lib/config';
 import { browser } from '$app/environment';
 
 /* Start time of the timer */
@@ -18,3 +19,8 @@ export const timerMinutes: Writable<number> = writable(storedTimerMinutesValue |
 timerMinutes.subscribe((value: number) => {
 	browser && localStorage.setItem(timerMinutesKey, JSON.stringify(value));
 });
+
+export const timerText: Writable<string> = writable('--:--');
+export const timerProgress: Writable<number> = writable(0);
+
+export const documentTitle: Writable<string> = writable(defaultTitle);
