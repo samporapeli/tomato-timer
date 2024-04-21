@@ -1,1 +1,1 @@
-export const defaultTitle = 'Tomato Timer';
+export const defaultTitle = '🍅 Tomato Timer';

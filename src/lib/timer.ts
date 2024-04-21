@@ -1,6 +1,7 @@
 import { get } from 'svelte/store';
 
 import { defaultTitle } from '$lib/config';
+import { notify, requestNotificationPermission } from '$lib/notifications';
 import { documentTitle, startTime, timerMinutes, timerProgress, timerText } from '$lib/stores';
 import { timerTextFromSeconds } from '$lib/utils';
 
@@ -21,7 +22,7 @@ const updateTimer = () => {
 		documentTitle.set(defaultTitle);
 		startTime.set(null);
 		timerText.set('00:00');
-		alert('Timer finished!');
+		notify('🍅 Tomato timer finished!');
 		return;
 	}
 	timerText.set(timerTextFromSeconds(secondsRemaining));
@@ -33,6 +34,7 @@ export const handleTimerToggle = () => {
 };
 
 export const handleStart = (minutes: number | undefined = undefined) => {
+	requestNotificationPermission();
 	if (currentTimerInterval) {
 		clearInterval(currentTimerInterval);
 	}

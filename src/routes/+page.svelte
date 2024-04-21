@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
+	import NotificationStatus from '../components/NotificationStatus.svelte';
+
 	import { defaultTitle } from '$lib/config';
 	import { startTime, timerMinutes, timerProgress, timerText } from '$lib/stores';
 	import { handleStart, handleTimerToggle } from '$lib/timer';
@@ -36,6 +38,7 @@
 
 <h2 id="timer">{$timerText}</h2>
 <h3 id="progress">{($timerProgress * 100).toFixed(2)} %</h3>
+<NotificationStatus />
 
 <style lang="scss">
 	#quickstart, #manual {
@@ -43,10 +46,6 @@
 		display: flex;
 		justify-content: space-between;
 		margin-bottom: 0.3rem;
-	}
-
-	button, input {
-		min-height: 3rem;
 	}
 
 	#manual {

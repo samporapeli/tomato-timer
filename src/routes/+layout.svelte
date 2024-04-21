@@ -4,12 +4,13 @@
 </section>
 
 <style lang="scss">
-	:global(html) {
-		background-color: hsl(9, 20%, 4%);
-	}
+:global(html) {
+	background-color: hsl(9, 20%, 4%);
+	color: white;
+	text-align: center;
 
-	* {
-		color: white;
+	:global(button), :global(input) {
+		min-height: 3rem;
 	}
 
 	h1 {
@@ -25,4 +26,5 @@
 		align-items: center;
 		justify-content: center;
 	}
+}
 </style>

@@ -25,3 +25,6 @@ export const timerText: Writable<string> = writable('--:--');
 export const timerProgress: Writable<number> = writable(0);
 
 export const documentTitle: Writable<string> = writable(defaultTitle);
+
+type NotificationPermission = 'default' | 'granted' | 'denied';
+export const notificationPermissionStatus: Writable<NotificationPermission> = writable(browser && Notification.permission);
