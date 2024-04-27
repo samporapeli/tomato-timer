@@ -33,7 +33,7 @@
 </div>
 <div id="manual">
 <input type="number" min="0" bind:value={manualInputMinutes} />
-<button on:click={() => handleStart(manualInputMinutes)}>Start</button>
+<button disabled={!manualInputMinutes} on:click={() => handleStart(manualInputMinutes)}>{manualInputMinutes ? `Custom (${manualInputMinutes} minute${manualInputMinutes === 1 ? '' : 's'})` : 'input is not valid'}</button>
 </div>
 
 <h2 id="timer">{$timerText}</h2>
@@ -50,10 +50,11 @@
 
 	#manual {
 		input {
-			width: 80%;
+			width: 25%;
+			text-align: right;
 		}
 		button {
-			width: calc(20% - 1rem);
+			width: 70%;
 		}
 	}
 
