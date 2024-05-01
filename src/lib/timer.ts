@@ -22,7 +22,7 @@ const updateTimer = () => {
 		documentTitle.set(defaultTitle);
 		startTime.set(null);
 		timerText.set('00:00');
-		notify('🍅 Tomato timer finished!');
+		notify(`${get(timerMinutes)} minute timer finished!`);
 		return;
 	}
 	timerText.set(timerTextFromSeconds(secondsRemaining));

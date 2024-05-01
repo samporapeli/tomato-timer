@@ -2,6 +2,16 @@
 
 My take on a Pomodoro timer.
 
+## Configuration
+Use environment variables to configure the app:
+
+```bash
+PUBLIC_DEFAULT_PATH='/app/tomato-timer/'
+```
+
+Values are loaded to constants in `src/lib/config.ts`.
+Avoid importing values from `$env` elsewhere in the app.
+
 ## Development setup
 Once you've created a project and installed dependencies with `npm install`, start a development server:
 

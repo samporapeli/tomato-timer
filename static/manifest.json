@@ -1,7 +1,7 @@
 {
 	"name": "Tomato Timer",
-	"short_name": "Tomato Timer",
-	"description": "A simple Pomodoro timer.",
+	"short_name": "Tomato",
+	"description": "A simple timer to help you focus on your work.",
 	"start_url": "/app/tomato-timer/",
 	"display": "standalone",
 	"background_color": "#90361d",
