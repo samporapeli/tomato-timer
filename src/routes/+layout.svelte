@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { defaultTitle } from '$lib/config';
 	import Footer from '../components/Footer.svelte';
+
+	import { defaultTitle } from '$lib/config';
 </script>
 
 <svelte:head>
