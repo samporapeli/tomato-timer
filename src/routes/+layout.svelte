@@ -1,17 +1,24 @@
+<script lang="ts">
+	import Footer from '../components/Footer.svelte';
+</script>
+
 <section>
 	<h1>Tomato Timer</h1>
 	<slot />
 </section>
+<Footer />
 
 <style lang="scss">
-$tomato-color: hsl(13, 66%, 44%);
-$background-color: darken($tomato-color, 10%);
+@use '../styles/colors.scss' as *;
+$transition-time: 0.15s;
 
-:global(html) {
+:global(html), :global(body) {
 	background-color: $background-color;
 	color: white;
 	font-family: 'Roboto', sans-serif;
 	text-align: center;
+	padding: 0;
+	margin: 0;
 
 	:global(button), :global(input) {
 		min-height: 3rem;
@@ -22,7 +29,7 @@ $background-color: darken($tomato-color, 10%);
 		color: white;
 		font-weight: bold;
 		cursor: pointer;
-		transition: 0.15s;
+		transition: $transition-time;
 		&:hover {
 			background-color: darken($background-color, 20%);
 			border-radius: 0.6rem;
@@ -49,14 +56,25 @@ $background-color: darken($tomato-color, 10%);
 		padding: 0rem 1rem;
 	}
 
-	h1 {
+	:global(h1) {
 		margin-bottom: 3rem;
+	}
+
+	:global(a) {
+		color: white;
+		text-decoration: underline;
+		font-weight: bold;
+		transition: $transition-time;
+		&:hover {
+			color: lighten($tomato-color, 50%);
+		}
 	}
 
 	section {
 		max-width: 25rem;
-		min-height: 80vh;
-		margin: 0 auto;
+		min-height: calc(100vh - 6rem);
+		margin: 0 auto 4rem auto;
+		padding: 0.2rem;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
