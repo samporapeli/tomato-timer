@@ -4,8 +4,8 @@ import { defaultPath } from '$lib/config';
 self.addEventListener('install', () => {});
 self.addEventListener('activate', () => {});
 
-// Handle notification clicks
 /* eslint-disable no-undef */
+// Handle notification clicks
 self.addEventListener('notificationclick', (event) => {
 	event.notification.close();
 	event.waitUntil(
@@ -16,8 +16,14 @@ self.addEventListener('notificationclick', (event) => {
 			})
 			.then((clientList) => {
 				for (const client of clientList) {
-					if (client.url.endsWith(defaultPath)) return client.focus();
+					if (client.url.endsWith(defaultPath)) {
+						if (event.action.startsWith('start-'))
+							client.postMessage({ type: 'notification-action', value: event.action });
+						client.focus();
+					}
 				}
+				// If no client is found, open a new window.
+				// Unfortunately, the action is not passed to the new window as of now.
 				if (clients.openWindow) return clients.openWindow(defaultPath);
 			}),
 	);

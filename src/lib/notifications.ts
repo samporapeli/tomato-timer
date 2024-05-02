@@ -1,6 +1,6 @@
 import { notificationPermissionStatus } from '$lib/stores.ts';
 
-export const notify = async (message: string) => {
+export const notify = async (message: string, actions=[]) => {
 	if (!Notification) return;
 	if (Notification.permission === 'granted') {
 		if ('serviceWorker' in navigator) {
@@ -9,6 +9,7 @@ export const notify = async (message: string) => {
 				body: message,
 				icon: 'icons/icon-256x256.png',
 				badge: 'icons/badge-96x96.png',
+				actions,
 			};
 			registration?.showNotification('Tomato Timer', options) || new Notification(message);
 		} else {

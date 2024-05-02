@@ -4,30 +4,36 @@
 	import NotificationStatus from '../components/NotificationStatus.svelte';
 
 	import { startTime, timerMinutes, timerProgress, timerText } from '$lib/stores';
-	import { handleStart } from '$lib/timer';
+	import { startTimer, presets } from '$lib/timer';
 
 
 	let manualInputMinutes = $timerMinutes || 25;
 	
 	onMount(() => {
 		if ($startTime) {
-			handleStart();
+			startTimer();
 		}
+		// listen messages from the service worker
+		navigator.serviceWorker.addEventListener('message', (event) => {
+			if (event.data.type === 'notification-action') {
+				startTimer(Number.parseInt(event.data.value.split('-')[1]));
+			}
+		});
 	});
 
 	const handleMinuteInputKeydown = (event: KeyboardEvent) => {
-		if (event.key === 'Enter') handleStart(manualInputMinutes);
+		if (event.key === 'Enter') startTimer(manualInputMinutes);
 	};
 </script>
 
 <div id="quickstart">
-{#each [25, 5, 10] as minutes}
-	<button on:click={() => handleStart(minutes)}>{minutes} minutes</button>
+{#each presets as minutes}
+	<button on:click={() => startTimer(minutes)}>{minutes} minutes</button>
 {/each}
 </div>
 <div id="manual">
 <input type="number" min="0" bind:value={manualInputMinutes} on:keydown={handleMinuteInputKeydown}/>
-<button disabled={!manualInputMinutes} on:click={() => handleStart(manualInputMinutes)}>{manualInputMinutes ? `Custom (${manualInputMinutes} minute${manualInputMinutes === 1 ? '' : 's'})` : 'input is not valid'}</button>
+<button disabled={!manualInputMinutes} on:click={() => startTimer(manualInputMinutes)}>{manualInputMinutes ? `Custom (${manualInputMinutes} minute${manualInputMinutes === 1 ? '' : 's'})` : 'input is not valid'}</button>
 </div>
 
 <h2 id="timer">{$timerText}</h2>

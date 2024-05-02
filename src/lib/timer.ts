@@ -7,6 +7,8 @@ import { timerTextFromSeconds } from '$lib/utils';
 
 let currentTimerInterval: number | undefined;
 
+export const presets = [25, 5, 10];
+
 const updateTimer = () => {
 	if (!get(startTime)) {
 		console.error('Timer started without a start time!');
@@ -22,14 +24,20 @@ const updateTimer = () => {
 		documentTitle.set(defaultTitle);
 		startTime.set(null);
 		timerText.set('00:00');
-		notify(`${get(timerMinutes)} minute timer finished!`);
+		notify(
+			`${get(timerMinutes)} minute timer finished!`,
+			presets.map((minutes) => ({
+				action: `start-${minutes}`,
+				title: `▶ ${minutes} min`,
+			})),
+		);
 		return;
 	}
 	timerText.set(timerTextFromSeconds(secondsRemaining));
 	documentTitle.set(timerText);
 };
 
-export const handleStart = (minutes: number | undefined = undefined) => {
+export const startTimer = (minutes: number | undefined = undefined) => {
 	requestNotificationPermission();
 	if (currentTimerInterval) {
 		clearInterval(currentTimerInterval);
