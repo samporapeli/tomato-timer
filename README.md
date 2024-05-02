@@ -21,6 +21,12 @@ Once you've created a project and installed dependencies with `npm install`, sta
 npm run dev
 ```
 
+### Linting
+
+```zsh
+npx eslint src
+```
+
 ## Build & deploy
 To create a production version of the app:
 
