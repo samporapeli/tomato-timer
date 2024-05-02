@@ -3,7 +3,6 @@
 
 	import NotificationStatus from '../components/NotificationStatus.svelte';
 
-	import { defaultTitle } from '$lib/config';
 	import { startTime, timerMinutes, timerProgress, timerText } from '$lib/stores';
 	import { handleStart, handleTimerToggle } from '$lib/timer';
 
@@ -21,10 +20,6 @@
 		});
 	});
 </script>
-
-<svelte:head>
-	<title>{defaultTitle}</title>
-</svelte:head>
 
 <div id="quickstart">
 {#each [25, 5, 10] as minutes}

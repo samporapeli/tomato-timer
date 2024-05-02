@@ -1,6 +1,11 @@
 <script lang="ts">
+	import { defaultTitle } from '$lib/config';
 	import Footer from '../components/Footer.svelte';
 </script>
+
+<svelte:head>
+	<title>{defaultTitle}</title>
+</svelte:head>
 
 <section>
 	<h1>Tomato Timer</h1>
