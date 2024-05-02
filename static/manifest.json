@@ -5,7 +5,7 @@
 	"start_url": "/app/tomato-timer/",
 	"display": "standalone",
 	"background_color": "#90361d",
-	"theme_color": "#be4826",
+	"theme_color": "#662615",
 	"icons": [
 		{
 			"src": "icons/icon-48x48.png",
