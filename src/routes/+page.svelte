@@ -4,7 +4,7 @@
 	import NotificationStatus from '../components/NotificationStatus.svelte';
 
 	import { startTime, timerMinutes, timerProgress, timerText } from '$lib/stores';
-	import { handleStart, handleTimerToggle } from '$lib/timer';
+	import { handleStart } from '$lib/timer';
 
 
 	let manualInputMinutes = $timerMinutes || 25;
@@ -13,11 +13,6 @@
 		if ($startTime) {
 			handleStart();
 		}
-		document.addEventListener('keydown', (event) => {
-			if (event.code === 'Space') {
-				handleTimerToggle();
-			}
-		});
 	});
 
 	const handleMinuteInputKeydown = (event: KeyboardEvent) => {

@@ -29,10 +29,6 @@ const updateTimer = () => {
 	documentTitle.set(timerText);
 };
 
-export const handleTimerToggle = () => {
-	handleStart();
-};
-
 export const handleStart = (minutes: number | undefined = undefined) => {
 	requestNotificationPermission();
 	if (currentTimerInterval) {
