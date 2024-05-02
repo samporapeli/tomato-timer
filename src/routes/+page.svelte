@@ -19,6 +19,10 @@
 			}
 		});
 	});
+
+	const handleMinuteInputKeydown = (event: KeyboardEvent) => {
+		if (event.key === 'Enter') handleStart(manualInputMinutes);
+	};
 </script>
 
 <div id="quickstart">
@@ -27,7 +31,7 @@
 {/each}
 </div>
 <div id="manual">
-<input type="number" min="0" bind:value={manualInputMinutes} />
+<input type="number" min="0" bind:value={manualInputMinutes} on:keydown={handleMinuteInputKeydown}/>
 <button disabled={!manualInputMinutes} on:click={() => handleStart(manualInputMinutes)}>{manualInputMinutes ? `Custom (${manualInputMinutes} minute${manualInputMinutes === 1 ? '' : 's'})` : 'input is not valid'}</button>
 </div>
 
