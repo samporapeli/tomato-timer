@@ -7,6 +7,8 @@ Use environment variables to configure the app:
 
 ```bash
 PUBLIC_DEFAULT_PATH='/app/tomato-timer/'
+PUBLIC_PLAUSIBLE_DATA_DOMAIN='sampo.website'
+PUBLIC_PLAUSIBLE_SCRIPT_SRC='https://plausible.sampo.website/js/script.js'
 ```
 
 Values are loaded to constants in `src/lib/config.ts`.

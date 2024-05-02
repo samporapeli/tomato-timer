@@ -3,6 +3,8 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 process.env.PUBLIC_APP_VERSION = process.env.npm_package_version || '(unknown)';
 process.env.PUBLIC_DEFAULT_PATH = process.env.PUBLIC_DEFAULT_PATH || '/';
+process.env.PUBLIC_PLAUSIBLE_DATA_DOMAIN = process.env.PUBLIC_PLAUSIBLE_DATA_DOMAIN || '';
+process.env.PUBLIC_PLAUSIBLE_SCRIPT_SRC = process.env.PUBLIC_PLAUSIBLE_SCRIPT_SRC || '';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {

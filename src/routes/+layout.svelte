@@ -1,10 +1,13 @@
 <script lang="ts">
 	import Footer from '../components/Footer.svelte';
 
-	import { defaultTitle } from '$lib/config';
+	import { defaultTitle, plausible } from '$lib/config';
 </script>
 
 <svelte:head>
+	{#if plausible.isConfigured}
+		<script async defer data-domain="{plausible.dataDomain}" src="{plausible.scriptSrc}"></script>
+	{/if}
 	<title>{defaultTitle}</title>
 </svelte:head>
 
