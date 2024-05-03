@@ -1,7 +1,7 @@
 import { defaultPath } from '$lib/config';
 
 // Register the service worker
-self.addEventListener('install', () => {});
+self.addEventListener('install', () => { self.skipWaiting(); });
 self.addEventListener('activate', () => {});
 
 /* eslint-disable no-undef */
