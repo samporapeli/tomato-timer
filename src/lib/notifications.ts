@@ -1,7 +1,8 @@
 import { notificationPermissionStatus } from '$lib/stores.ts';
+import { notificationsAvailable } from './utils.ts';
 
 export const notify = async (message: string, actions=[]) => {
-	if (!Notification) return;
+	if (!notificationsAvailable) return;
 	if (Notification.permission === 'granted') {
 		if ('serviceWorker' in navigator) {
 			const registration = await navigator.serviceWorker.getRegistration();
@@ -21,7 +22,7 @@ export const notify = async (message: string, actions=[]) => {
 };
 
 export const requestNotificationPermission = async () => {
-	if (!Notification) return;
+	if (!notificationsAvailable) return;
 	if (Notification.permission === 'granted') {
 		return;
 	}

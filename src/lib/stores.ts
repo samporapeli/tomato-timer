@@ -2,6 +2,7 @@ import { type Writable, writable } from 'svelte/store';
 
 import { browser } from '$app/environment';
 import { defaultTitle } from '$lib/config';
+import { notificationsAvailable } from './utils.ts';
 
 /* Start time of the timer */
 const startTimeKey = 'tomatoTimerStartTime';
@@ -27,4 +28,4 @@ export const timerProgress: Writable<number> = writable(0);
 export const documentTitle: Writable<string> = writable(defaultTitle);
 
 type NotificationPermission = 'default' | 'granted' | 'denied';
-export const notificationPermissionStatus: Writable<NotificationPermission> = writable(browser && Notification.permission);
+export const notificationPermissionStatus: Writable<NotificationPermission> = writable(notificationsAvailable && Notification.permission);

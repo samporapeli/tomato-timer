@@ -1,3 +1,7 @@
+import { browser } from '$app/environment';
+
+export const notificationsAvailable = browser && 'Notification' in window;
+
 const padded = (input: number | string): string => {
 	return input.toString().padStart(2, '0');
 };
